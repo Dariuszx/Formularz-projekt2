@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="skrypt.js"></script>
+
+</head>
+<body>
+    <div id="background">
+
+        <div id="formularz">
+            <form action="">
+                <p id="imie">Imię: <input class="textInput" type="text" onchange="checkString( this, 'imie' )" required /></p>
+
+                <p id="nazwisko">Nazwisko: <input class="textInput" onchange="checkString( this, 'nazwisko' )" type="text" required /></p>
+
+                <p id="haslo1">Hasło: <input class="textInput" type="password" onkeyup="checkPassword( this, 'haslo1' )" required /></p>
+
+                <p id="haslo2">Powtórz hasło: <input id="inputhaslo2" class="textInput" type="password" onchange="isTheSame( this, 'haslo2' )" required /></p>
+
+                <p>Login: <input id="login" class="textInput" type="text" required /></p>
+
+                <p id="email">E-mail: <input type="email" name="email" class="textInput" onkeyup="checkEmail( this, 'email' )" required /></p>
+
+                <p id="dataUrodzenia">Data urodzenia: <input type="date" name="data" class="textInput" max="1900-01-01" required /></p></p>
+
+                <p id="pesel">PESEL: <input class="textInput" type="text" onchange="checkPesel( this, 'pesel' )" required /></p>
+
+                <p id="sex">Mężczyzna: <input type="radio" name="sex" id="male" />Kobieta: <input type="radio" name="sex" id="female" /></p>
+
+                <br /><input type="submit" />
+
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>
