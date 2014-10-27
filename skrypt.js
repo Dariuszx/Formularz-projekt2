@@ -51,7 +51,7 @@ function checkString( object, pId ) {
 
     for( var i=0; i < charArray.length; i++ ) {
 
-        if( charArray[i] < 'ą' || charArray[i] > 'ź' ) {
+        if( (charArray[i] < 'a' || charArray[i] > 'z') && ( charArray[i] < 'ą' || charArray[i] > 'ź' ) ) {
 
             createWarning( pId, "Błąd" );
             break;
