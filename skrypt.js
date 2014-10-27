@@ -33,7 +33,7 @@ function checkForUser( object, pid ) {
 function funkcja( arr ) {
 
     for( var i=0; i<arr.length; i++ ) {
-        console.error( arr[i] );
+        alert( arr[i] );
     }
 }
 
