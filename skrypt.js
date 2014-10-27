@@ -1,5 +1,39 @@
 var password;
 
+function checkForUser( object, pid ) {
+
+    var xmlhttp;
+    var odpowiedzSerwera;
+
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+        {
+           odpowiedzSerwera = xmlhttp.responseText;
+        } else {
+            alert( "błąd" );
+        }
+    }
+
+    var url = "http://len.iem.pw.edu.pl/staff/~chaberb/apps/register/check/"+object.value;
+
+    xmlhttp.open('POST', url, true);
+
+    xmlhttp.send( null );
+
+
+
+}
+
 function removeElement( id ) {
 
     var parent = document.getElementById( id );
@@ -105,7 +139,7 @@ function checkPassword( object, pid ) {
 
 function isTheSame( object, pid ) {
 
-
+    removeElement(pid);
     if( object.value != password ) {
         createWarning( pid, "Nie takie same" );
     }

@@ -16,16 +16,15 @@
                 <p id="imie">Imię: <input class="textInput" type="text" onchange="checkString( this, 'imie' )" required /></p>
 
                 <p id="nazwisko">Nazwisko: <input class="textInput" onchange="checkString( this, 'nazwisko' )" type="text" required /></p>
-
                 <p id="haslo1">Hasło: <input class="textInput" type="password" onkeyup="checkPassword( this, 'haslo1' )" required /></p>
 
-                <p id="haslo2">Powtórz hasło: <input id="inputhaslo2" class="textInput" type="password" onchange="isTheSame( this, 'haslo2' )" required /></p>
+                <p id="haslo2">Powtórz hasło: <input id="inputhaslo2" disabled="disabled" class="textInput" type="password" onchange="isTheSame( this, 'haslo2' )"  required /></p>
 
-                <p>Login: <input id="login" class="textInput" type="text" required /></p>
+                <p id="login">Login: <input class="textInput" name="login" type="text" onchange="checkForUser( this, 'login' )" required /></p>
 
-                <p id="email">E-mail: <input type="email" name="email" class="textInput" onkeyup="checkEmail( this, 'email' )" required /></p>
+                <p id="email">E-mail: <input type="email" name="email" class="textInput" onchange="checkEmail( this, 'email' )" required /></p>
 
-                <p id="dataUrodzenia">Data urodzenia: <input type="date" name="data" class="textInput" max="1900-01-01" required /></p></p>
+                <p id="dataUrodzenia">Data urodzenia: <input type="date" name="data" class="textInput" min="1900-01-01" required /></p></p>
 
                 <p id="pesel">PESEL: <input class="textInput" type="text" onchange="checkPesel( this, 'pesel' )" required /></p>
 
