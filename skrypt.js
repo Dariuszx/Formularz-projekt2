@@ -30,7 +30,7 @@ function checkForUser( object, pid ) {
 
     var obiekt = JSON.parse( xmlhttp.responseText );
 
-    if( obiekt[object.value] == false ) alert( "false" );
+    alert( xmlhttp.responseText );
 
 
 
