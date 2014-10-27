@@ -28,7 +28,7 @@ function checkForUser( object, pid ) {
 
     xmlhttp.send( null );
 
-    var obiekt = JSON.parse( xmlhttp.responseText );
+    var obiekt = JSON().parse( xmlhttp.responseText );
 
     alert( xmlhttp.responseText );
 
