@@ -19,8 +19,6 @@ function checkForUser( object, pid ) {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
         {
            odpowiedzSerwera = xmlhttp.responseText;
-        } else {
-            console.error( xmlhttp.responseText );
         }
     }
 
@@ -29,6 +27,10 @@ function checkForUser( object, pid ) {
     xmlhttp.open('GET', url, true);
 
     xmlhttp.send( null );
+
+    var obiekt = JSON.parse( xmlhttp.responseText );
+
+    if( obiekt[object.value] == false ) alert( "false" );
 
 
 
