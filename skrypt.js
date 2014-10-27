@@ -19,7 +19,7 @@ function checkForUser( object, pid ) {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
         {
             odpowiedzSerwera = JSON.parse( xmlhttp.responseText );
-            funkcja( odpowiedzSerwera );
+            alert( odpowiedzSerwera[0] );
         }
     }
 
