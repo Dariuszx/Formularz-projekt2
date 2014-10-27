@@ -42,6 +42,8 @@ function checkString( object, pId ) {
 
     removeElement( pId );
 
+    if( string.length == 0 ) return;
+
     if( string.length < 3 ) {
         createWarning( pId, "Za krótkie" );
         return;
@@ -85,6 +87,8 @@ function checkPassword( object, pid ) {
     var string = object.value;
 
     removeElement( pid );
+
+    if( string.length == 0 ) return;
 
     if( string.length < 5 ) {
         createWarning( pid, "Za krótkie" );
