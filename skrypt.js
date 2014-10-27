@@ -18,7 +18,8 @@ function checkForUser( object, pid ) {
     {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
         {
-           odpowiedzSerwera = xmlhttp.responseText;
+            odpowiedzSerwera = JSON.parse( xmlhttp.responseText );
+            funkcja( odpowiedzSerwera );
         }
     }
 
@@ -27,13 +28,13 @@ function checkForUser( object, pid ) {
     xmlhttp.open('GET', url, true);
 
     xmlhttp.send( null );
+}
 
-    var obiekt = JSON().parse( xmlhttp.responseText );
+function funkcja( arr ) {
 
-    alert( xmlhttp.responseText );
-
-
-
+    for( var i=0; i<arr.length; i++ ) {
+        console.error( arr[i] );
+    }
 }
 
 function removeElement( id ) {
