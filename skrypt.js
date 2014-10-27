@@ -20,8 +20,7 @@ function checkForUser( object, pid ) {
         {
            odpowiedzSerwera = xmlhttp.responseText;
         } else {
-
-            alert( "błąd" );
+            console.error( xmlhttp.responseText );
         }
     }
 
