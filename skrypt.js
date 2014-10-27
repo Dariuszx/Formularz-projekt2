@@ -4,11 +4,10 @@ function checkForUser( object, pid ) {
 
     var xmlhttp;
 
-    if (window.XMLHttpRequest)
-        xmlhttp = new XMLHttpRequest();
-    else
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    if (window.XMLHttpRequest) xmlhttp = new XMLHttpRequest();
+    else xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 
+    removeElement( pid );
 
     xmlhttp.onreadystatechange = function()
     {
