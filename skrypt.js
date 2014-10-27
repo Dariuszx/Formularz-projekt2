@@ -26,7 +26,7 @@ function checkForUser( object, pid ) {
 
     var url = "http://len.iem.pw.edu.pl/staff/~chaberb/apps/register/check/"+object.value;
 
-    xmlhttp.open('POST', url, true);
+    xmlhttp.open('GET', url, true);
 
     xmlhttp.send( null );
 
