@@ -1,28 +1,19 @@
 var password;
 
-function checkForUser( object, pid ) {
+addEvent( 'firstname', 'change', checkString );
+addEvent( 'lastname', 'change', checkString );
+addEvent( 'password1', 'keyup', checkPassword );
+addEvent( 'password2', 'blur', isTheSame );
+addEvent( 'login', 'change', checkForUser );
+addEvent( 'email', 'change', checkEmail );
+addEvent( 'pesel', 'change', checkPesel );
 
-    var xmlhttp;
+function addEvent( id, eventType, fun ) { //Id pola, typ zdarzenia, funkcja wywoływana
 
-    if (window.XMLHttpRequest) xmlhttp = new XMLHttpRequest();
-    else xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    var element = document.getElementById( id );
 
-    removeElement( pid );
+    element.addEventListener( eventType, function() { fun( element, id+"p" ); } );
 
-    xmlhttp.onreadystatechange = function()
-    {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-        {
-            var odpowiedzSerwera = JSON.parse( xmlhttp.responseText );
-            if( odpowiedzSerwera[object.value] == true ) {
-                createWarning( pid, "Login zajęty");
-            }
-        }
-    }
-
-    var url = "http://len.iem.pw.edu.pl/staff/~chaberb/apps/register/check/"+object.value;
-    xmlhttp.open('GET', url, true);
-    xmlhttp.send( null );
 }
 
 function removeElement( id ) {
@@ -33,6 +24,21 @@ function removeElement( id ) {
     if( !child ) return;
 
     parent.removeChild( child );
+}
+
+function createWarning( id, string ) {
+
+    var element = document.createElement("span");
+    element.style.color = "red";
+    element.setAttribute( 'id', id + "span" );
+
+    var strong = document.createElement( "strong" );
+    strong.appendChild( document.createTextNode( string ) );
+    strong.style.fontSize = "80%";
+    element.appendChild( strong );
+
+    var p = document.getElementById( id );
+    p.appendChild( element );
 }
 
 function checkString( object, pId ) {
@@ -59,26 +65,39 @@ function checkString( object, pId ) {
     }
 }
 
-function createWarning( id, string ) {
+function checkForUser( object, pid ) {
 
-    var element = document.createElement("span");
-    element.style.color = "red";
-    element.setAttribute( 'id', id + "span" );
+    var xmlhttp;
 
-    //var tekst = document.createTextNode( string );
-   //element.appendChild( tekst );
+    if (window.XMLHttpRequest) xmlhttp = new XMLHttpRequest();
+    else xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 
-    var strong = document.createElement( "strong" );
-    strong.appendChild( document.createTextNode( string ) );
-    strong.style.fontSize = "80%";
-    element.appendChild( strong );
+    removeElement( pid );
 
-    var p = document.getElementById( id );
-    p.appendChild( element );
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+        {
+            var odpowiedzSerwera = JSON.parse( xmlhttp.responseText );
+            if( odpowiedzSerwera[object.value] == true ) {
+                createWarning( pid, "Login zajęty");
+            }
+        }
+    }
 
+    var url = "http://len.iem.pw.edu.pl/staff/~chaberb/apps/register/check/"+object.value;
+    xmlhttp.open('GET', url, true);
+    xmlhttp.send( null );
 }
 
 function checkPassword( object, pid ) {
+
+    function disable() {
+        var haslo2 = document.getElementById( "password2" );
+        haslo2.style.background = "black";
+        haslo2.setAttribute( 'disabled', 'disabled' );
+    }
+
 
     var numbers = 0;
     var extraChars = 0;
@@ -88,7 +107,10 @@ function checkPassword( object, pid ) {
 
     removeElement( pid );
 
-    if( string.length == 0 ) return;
+    if( string.length == 0 ) {
+        disable();
+        return;
+    }
 
     if( string.length < 5 ) {
         createWarning( pid, "Za krótkie" );
@@ -114,28 +136,22 @@ function checkPassword( object, pid ) {
         } else {
             password = string;
         }
-
-
     }
 
     if( error > 0 ) {
-        var haslo2 = document.getElementById( "inputhaslo2" );
-        haslo2.style.background = "black";
-
-        haslo2.setAttribute( 'disabled', 'disabled' );
+        disable();
     } else {
-        var haslo2 = document.getElementById( "inputhaslo2" );
-
+        var haslo2 = document.getElementById( "password2" );
         haslo2.removeAttribute( 'disabled' );
         haslo2.style.background = "white";
     }
-
 }
 
 function isTheSame( object, pid ) {
 
     removeElement(pid);
-    if( object.value != password ) {
+
+    if( object.value != document.getElementById( 'password1').value ) {
         createWarning( pid, "Nie takie same" );
     }
 }
@@ -145,6 +161,8 @@ function checkEmail( object, pid ) {
     var email = object.value;
 
     removeElement( pid );
+
+    if( object.value.length == 0 ) return;
 
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -182,11 +200,16 @@ function checkPesel( object, pid ) {
     }
 
     if( parseInt(pesel[9]) %2 == 0 ) {
+
         var radio = document.getElementById( 'female');
         radio.setAttribute( 'checked', 'checked' );
+        document.getElementById( 'male').setAttribute( 'disabled', 'disabled' );
+
     } else {
+
         var radio = document.getElementById( 'male');
         radio.setAttribute( 'checked', 'checked' );
+        document.getElementById( 'female').setAttribute( 'disabled', 'disabled' );
     }
 
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script type="text/javascript" src="skrypt.js"></script>
+
 
 </head>
 <body>
@@ -13,22 +13,23 @@
 
         <div id="formularz">
             <form action="">
-                <p id="imie">Imię: <input class="textInput" type="text" onchange="checkString( this, 'imie' )" required /></p>
+                <p id="firstnamep">Imię: <input id="firstname" name="firstname" class="textInput" type="text" required /></p>
 
-                <p id="nazwisko">Nazwisko: <input class="textInput" onchange="checkString( this, 'nazwisko' )" type="text" required /></p>
-                <p id="haslo1">Hasło: <input class="textInput" type="password" onkeyup="checkPassword( this, 'haslo1' )" required /></p>
+                <p id="lastnamep">Nazwisko: <input id="lastname" name="lastname"  class="textInput" type="text" required /></p>
 
-                <p id="haslo2">Powtórz hasło: <input id="inputhaslo2" disabled="disabled" class="textInput" type="password" onchange="isTheSame( this, 'haslo2' )"  required /></p>
+                <p id="password1p">Hasło: <input  id="password1" name="password" class="textInput" type="password" required /></p>
 
-                <p id="login">Login: <input class="textInput" name="login" type="text" onchange="checkForUser( this, 'login' )" required /></p>
+                <p id="password2p">Powtórz hasło: <input id="password2" disabled="disabled" class="textInput" type="password"  required /></p>
 
-                <p id="email">E-mail: <input type="email" name="email" class="textInput" onchange="checkEmail( this, 'email' )" required /></p>
+                <p id="loginp">Login: <input name="login" id="login" class="textInput" type="text" required /></p>
 
-                <p id="dataUrodzenia">Data urodzenia: <input type="date" name="data" class="textInput" min="1900-01-01" required /></p></p>
+                <p id="emailp">E-mail: <input  name="email" id="email" class="textInput" type="email" required /></p>
 
-                <p id="pesel">PESEL: <input class="textInput" type="text" onchange="checkPesel( this, 'pesel' )" required /></p>
+                <p id="peselp">PESEL: <input name="sex" id="pesel" class="textInput" type="text" required /></p>
 
-                <p id="sex">Mężczyzna: <input type="radio" name="sex" id="male" />Kobieta: <input type="radio" name="sex" id="female" /></p>
+                <p id="birthdatep">Data urodzenia: <input name="birthdate" id="birthdate" type="date" class="textInput" min="1900-01-01" required /></p></p>
+
+                <p id="sex">Mężczyzna: <input name="sex" id="male" type="radio"  />Kobieta: <input type="radio" name="sex" id="female" /></p>
 
                 <br /><input type="submit" />
 
@@ -36,6 +37,8 @@
         </div>
 
     </div>
+
+    <script type="text/javascript" src="skrypt.js"></script>
 
 </body>
 </html>
