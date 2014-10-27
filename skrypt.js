@@ -3,38 +3,27 @@ var password;
 function checkForUser( object, pid ) {
 
     var xmlhttp;
-    var odpowiedzSerwera;
 
     if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp = new XMLHttpRequest();
-    }
     else
-    {// code for IE6, IE5
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
+
 
     xmlhttp.onreadystatechange = function()
     {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
         {
-            odpowiedzSerwera = JSON.parse( xmlhttp.responseText );
-            alert( odpowiedzSerwera[object.value] );
+            var odpowiedzSerwera = JSON.parse( xmlhttp.responseText );
+            if( odpowiedzSerwera[object.value] == true ) {
+                createWarning( pid, "Login zajęty");
+            }
         }
     }
 
     var url = "http://len.iem.pw.edu.pl/staff/~chaberb/apps/register/check/"+object.value;
-
     xmlhttp.open('GET', url, true);
-
     xmlhttp.send( null );
-}
-
-function funkcja( arr ) {
-
-    for( var i=0; i<arr.length; i++ ) {
-        alert( arr[i] );
-    }
 }
 
 function removeElement( id ) {
