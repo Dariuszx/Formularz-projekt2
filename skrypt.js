@@ -6,7 +6,8 @@ addEvent( 'password1', 'keyup', checkPassword );
 addEvent( 'password2', 'blur', isTheSame );
 addEvent( 'login', 'change', checkForUser );
 addEvent( 'email', 'change', checkEmail );
-addEvent( 'pesel', 'change', checkPesel );
+addEvent( 'pesel', 'blur', checkPesel );
+
 
 function addEvent( id, eventType, fun ) { //Id pola, typ zdarzenia, funkcja wywoływana
 
@@ -175,6 +176,8 @@ function checkPesel( object, pid ) {
 
     removeElement( pid );
 
+    if( object.value.length == 0 ) return;
+
     var pesel = object.value.split( '' );
 
     if( pesel.length != 11 ) {
@@ -189,14 +192,16 @@ function checkPesel( object, pid ) {
         }
     }
 
-    var rok = parseInt( pesel[0]+""+pesel[1] );
-    var miesiac = parseInt( pesel[2]+""+pesel[3] );
-    var dzien = parseInt( pesel[4]+""+pesel[5] );
-    var nrid = parseInt( pesel[6]+""+pesel[7]+""+pesel[8]+""+pesel[9]+""+pesel[10] );
+    var rok = pesel[0]+""+pesel[1];
+    var miesiac = pesel[2]+""+pesel[3];
+    var dzien = pesel[4]+""+pesel[5];
+    var nrid =pesel[6]+""+pesel[7]+""+pesel[8]+""+pesel[9]+""+pesel[10];
 
-    if( miesiac > 12 || dzien > 31 ) {
+    if( (parseInt( miesiac ) > 12 && parseInt( miesiac < 21 ) ) || parseInt( miesiac > 22 ) || parseInt( dzien > 31 ) ) {
         createWarning( pid, "Nieprawidłowy nr PESEL" );
         return;
+    } else {
+        checkDate( dzien, miesiac, rok );
     }
 
     if( parseInt(pesel[9]) %2 == 0 ) {
@@ -214,7 +219,19 @@ function checkPesel( object, pid ) {
 
 }
 
-function checkDate( object, pid ) {
-    //TODO
+function checkDate( day, month, year ) {
+
+    if( month <= 12 ) {
+        year = "19"+year;
+    } else {
+        year = "20"+year;
+        month = parseInt( month ) - 20;
+        if( month < 10 ) month = "0"+month.toString();
+        else month = month.toString();
+    }
+
+    var date = year+"-"+month+"-"+day;
+    document.getElementById( 'birthdate').setAttribute( 'value', date );
+
 }
 
