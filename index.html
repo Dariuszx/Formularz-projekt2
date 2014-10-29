@@ -3,7 +3,7 @@
 <head lang="en">
 
     <meta charset="UTF-8">
-    <title></title>
+    <title>Formularz rejestracyjny</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 
 
@@ -12,8 +12,8 @@
     <div id="background">
 
         <div id="formularz">
-            <form action="">
-                <p id="firstnamep">Imię: <input id="firstname" name="firstname" class="textInput" type="text" required /></p>
+            <form action="http://len.iem.pw.edu.pl/staff/~chaberb/apps/register/user/" method="POST">
+                <p id="firstnamep">Imię: <input id="firstname" name="firstname" class="textInput" type="text" required autofocus /></p>
 
                 <p id="lastnamep">Nazwisko: <input id="lastname" name="lastname"  class="textInput" type="text" required /></p>
 
@@ -25,6 +25,8 @@
 
                 <p id="emailp">E-mail: <input  name="email" id="email" class="textInput" type="email" required /></p>
 
+                <p id="photop">Awatar: <input name="photo" id="photo" type="file" class="textInput" required /></p>
+
                 <p id="peselp">PESEL: <input name="sex" id="pesel" class="textInput" type="text" required /></p>
 
                 <p id="birthdatep">Data urodzenia: <input value="08-02-1994" name="birthdate" id="birthdate" type="date" class="textInput" min="1900-01-01" /></p></p>
@@ -32,7 +34,6 @@
                 <p id="sex">Mężczyzna: <input name="sex" id="male" type="radio" />Kobieta: <input type="radio" name="sex" id="female" /></p>
 
                 <br /><input type="submit" />
-
 
             </form>
         </div>

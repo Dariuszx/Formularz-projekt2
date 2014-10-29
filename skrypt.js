@@ -8,6 +8,22 @@ addEvent( 'login', 'change', checkForUser );
 addEvent( 'email', 'change', checkEmail );
 addEvent( 'pesel', 'blur', checkPesel );
 
+COLOR = { GREEN : '#69ff41', DARKRED : '#700000', RED : '#ff3535', BLACK : '#141414', GREY : '#585858' };
+
+function colorInput( pid, borderColor) {
+
+    var array = pid.split( '' );
+    var size = pid.length;
+    array[ size-1 ] = '';
+
+    pid = '';
+
+    for( var i=0; i < size-1; i++ ) {
+        pid += ""+array[i];
+    }
+
+    document.getElementById( pid).style.borderColor = borderColor;
+}
 
 function addEvent( id, eventType, fun ) { //Id pola, typ zdarzenia, funkcja wywoływana
 
@@ -21,6 +37,7 @@ function removeElement( id ) {
 
     var parent = document.getElementById( id );
     var child = document.getElementById( id + "span" );
+    colorInput( id, COLOR.GREY );
 
     if( !child ) return;
 
@@ -29,6 +46,7 @@ function removeElement( id ) {
 
 function createWarning( id, string ) {
 
+    colorInput( id, COLOR.RED );
     var element = document.createElement("span");
     element.style.color = "red";
     element.setAttribute( 'id', id + "span" );
@@ -42,17 +60,17 @@ function createWarning( id, string ) {
     p.appendChild( element );
 }
 
-function checkString( object, pId ) {
+function checkString( object, pid ) {
 
     var string = object.value.toLowerCase();
     var charArray = string.split( '' );
 
-    removeElement( pId );
+    removeElement( pid );
 
     if( string.length == 0 ) return;
 
     if( string.length < 3 ) {
-        createWarning( pId, "Za krótkie" );
+        createWarning( pid, "Za krótkie" );
         return;
     }
 
@@ -60,10 +78,11 @@ function checkString( object, pId ) {
 
         if( (charArray[i] < 'a' || charArray[i] > 'z') && ( charArray[i] < 'ą' || charArray[i] > 'ź' ) ) {
 
-            createWarning( pId, "Błąd" );
-            break;
+            createWarning( pid, "Błąd" );
+            return;
         }
     }
+
 }
 
 function checkForUser( object, pid ) {
