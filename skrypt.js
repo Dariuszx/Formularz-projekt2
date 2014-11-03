@@ -94,6 +94,10 @@ function checkForUser( object, pid ) {
 
     removeElement( pid );
 
+    xmlhttp.timeout = function() {
+        console.error( "The request for specified url timed out.")
+    }
+
     xmlhttp.onreadystatechange = function()
     {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
