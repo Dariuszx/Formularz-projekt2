@@ -89,6 +89,8 @@ function checkForUser( object, pid ) {
 
     var xmlhttp;
 
+    if( object.value.length == 0 ) return;
+
     if (window.XMLHttpRequest) xmlhttp = new XMLHttpRequest();
     else xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 
